@@ -3,61 +3,79 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Summit Harbor Mortgage | Modern UI/UX</title>
-  <!-- Fonts & Icons -->
+  <title>Summit Harbor | Futuristic Mortgage UI</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
-    /* ===== Design System ===== */
+    /* ===== RESET & DESIGN SYSTEM ===== */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #FFFFFF;
-      color: #172033;
-      line-height: 1.6;
-      scroll-behavior: smooth;
-      -webkit-font-smoothing: antialiased;
-    }
     :root {
       --primary: #0B2545;
       --primary-light: #1a3a5e;
       --secondary: #D4A72C;
-      --secondary-light: #e6c04a;
-      --bg-light: #F5F7FA;
-      --bg-soft: #f0f3f8;
-      --text: #172033;
-      --text-soft: #3d4a5f;
-      --white: #FFFFFF;
-      --shadow-sm: 0 4px 16px rgba(11, 37, 69, 0.06);
-      --shadow-md: 0 12px 40px rgba(11, 37, 69, 0.08);
-      --shadow-lg: 0 24px 64px rgba(11, 37, 69, 0.12);
-      --radius: 16px;
-      --radius-sm: 10px;
-      --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --secondary-glow: rgba(212, 167, 44, 0.3);
+      --bg: #f0f4fc;
+      --card-bg: rgba(255, 255, 255, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.25);
+      --text: #0a1a2f;
+      --text-soft: #2c3e5a;
+      --shadow-sm: 0 8px 32px rgba(11, 37, 69, 0.06);
+      --shadow-lg: 0 20px 60px rgba(11, 37, 69, 0.10);
+      --radius-xl: 24px;
+      --radius-lg: 16px;
+      --transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(circle at 10% 20%, rgba(212, 167, 44, 0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 90% 80%, rgba(11, 37, 69, 0.02) 0%, transparent 50%);
     }
     .container {
       max-width: 1280px;
       margin: 0 auto;
-      padding: 0 28px;
+      padding: 0 32px;
     }
     a { text-decoration: none; color: var(--primary); }
-    h1, h2, h3 { font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
-    h2 { font-size: 2.6rem; margin-bottom: 0.5rem; }
-    .section-padding { padding: 80px 0; }
+    h1, h2, h3 { font-weight: 800; line-height: 1.15; letter-spacing: -0.03em; }
+    h2 { font-size: 2.8rem; margin-bottom: 0.5rem; }
+    .section-padding { padding: 88px 0; }
     .text-center { text-align: center; }
+
+    /* ===== GLASSMORPHISM ===== */
+    .glass {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-sm);
+    }
+    .glass-dark {
+      background: rgba(11, 37, 69, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: white;
+    }
+
+    /* ===== BUTTONS ===== */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 10px;
       font-weight: 600;
-      padding: 14px 32px;
+      padding: 14px 34px;
       border-radius: 60px;
       border: none;
       cursor: pointer;
@@ -65,48 +83,58 @@
       font-size: 1rem;
       background: var(--primary);
       color: white;
-      box-shadow: 0 4px 12px rgba(11, 37, 69, 0.15);
+      box-shadow: 0 4px 16px rgba(11, 37, 69, 0.15);
+      position: relative;
+      overflow: hidden;
     }
-    .btn:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(11, 37, 69, 0.2); }
+    .btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+      opacity: 0;
+      transition: 0.4s;
+    }
+    .btn:hover::after { opacity: 1; }
+    .btn:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(11, 37, 69, 0.2); }
     .btn-primary { background: var(--primary); color: white; }
-    .btn-primary:hover { background: #0a1e36; }
-    .btn-secondary { background: var(--secondary); color: var(--primary); box-shadow: 0 4px 12px rgba(212, 167, 44, 0.3); }
-    .btn-secondary:hover { background: #c49a24; box-shadow: 0 8px 24px rgba(212, 167, 44, 0.4); }
+    .btn-secondary { background: var(--secondary); color: var(--primary); box-shadow: 0 4px 20px var(--secondary-glow); }
+    .btn-secondary:hover { box-shadow: 0 12px 36px var(--secondary-glow); background: #c49a24; }
     .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); box-shadow: none; }
-    .btn-outline:hover { background: var(--primary); color: white; box-shadow: 0 8px 24px rgba(11, 37, 69, 0.15); }
-    .btn-gold { background: var(--secondary); color: var(--primary); font-weight: 700; box-shadow: 0 4px 16px rgba(212, 167, 44, 0.3); }
-    .btn-gold:hover { background: #b88c1e; box-shadow: 0 8px 28px rgba(212, 167, 44, 0.4); }
-    .btn-sm { padding: 10px 24px; font-size: 0.9rem; }
-    img { max-width: 100%; height: auto; display: block; }
+    .btn-outline:hover { background: var(--primary); color: white; }
+    .btn-gold { background: var(--secondary); color: var(--primary); box-shadow: 0 4px 24px var(--secondary-glow); }
+    .btn-gold:hover { box-shadow: 0 12px 40px var(--secondary-glow); background: #b88c1e; }
+    .btn-sm { padding: 10px 22px; font-size: 0.9rem; }
+    .btn-ghost { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.2); box-shadow: none; }
+    .btn-ghost:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.4); transform: translateY(-2px); }
 
     /* ===== HEADER ===== */
     header {
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(11,37,69,0.04);
       position: sticky;
       top: 0;
       z-index: 1000;
-      transition: 0.2s;
+      padding: 8px 0;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.3);
     }
     .header-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 0;
       flex-wrap: wrap;
     }
     .logo a {
-      font-size: 1.9rem;
-      font-weight: 800;
+      font-size: 2rem;
+      font-weight: 900;
       color: var(--primary);
       letter-spacing: -0.5px;
     }
     .logo span { color: var(--secondary); }
     .nav-desktop {
       display: flex;
-      gap: 32px;
+      gap: 28px;
       align-items: center;
     }
     .nav-desktop a {
@@ -122,15 +150,14 @@
       bottom: -4px;
       left: 0;
       width: 0;
-      height: 2px;
+      height: 2.5px;
       background: var(--secondary);
-      transition: 0.25s;
+      transition: 0.3s;
+      border-radius: 4px;
     }
     .nav-desktop a:hover { color: var(--primary); }
     .nav-desktop a:hover::after { width: 100%; }
     .nav-ctas { display: flex; gap: 12px; align-items: center; }
-    .nav-ctas .btn { padding: 10px 24px; font-size: 0.9rem; }
-
     .hamburger {
       display: none;
       font-size: 1.8rem;
@@ -138,236 +165,290 @@
       border: none;
       color: var(--primary);
       cursor: pointer;
-      padding: 4px;
     }
     .mobile-nav {
       display: none;
       flex-direction: column;
-      background: white;
       padding: 20px 0;
-      border-top: 1px solid #eef1f5;
       gap: 14px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
     }
-    .mobile-nav a { font-weight: 500; padding: 8px 0; border-bottom: 1px solid #f0f2f5; }
+    .mobile-nav a { font-weight: 500; padding: 8px 0; border-bottom: 1px solid #eef1f5; }
     .mobile-nav .btn { width: 100%; text-align: center; }
 
     /* ===== HERO ===== */
     .hero {
-      background: linear-gradient(160deg, #f5f7fa 0%, #e8ecf3 100%);
-      padding: 80px 0 72px;
+      padding: 60px 0 80px;
       position: relative;
       overflow: hidden;
     }
     .hero::before {
       content: '';
       position: absolute;
-      top: -40%;
-      right: -20%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(212,167,44,0.06) 0%, transparent 70%);
+      top: -30%;
+      right: -10%;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(212,167,44,0.08) 0%, transparent 70%);
       border-radius: 50%;
+      pointer-events: none;
     }
     .hero-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 56px;
+      gap: 60px;
       align-items: center;
       position: relative;
     }
-    .hero h1 { font-size: 3.8rem; margin-bottom: 20px; color: var(--primary); letter-spacing: -0.03em; }
-    .hero p { font-size: 1.2rem; color: var(--text-soft); max-width: 520px; margin-bottom: 32px; }
+    .hero h1 {
+      font-size: 4.2rem;
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--primary) 0%, #1a3a5e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-soft);
+      max-width: 500px;
+      margin-bottom: 32px;
+    }
     .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
-    .hero-image img { border-radius: var(--radius); box-shadow: var(--shadow-lg); }
+    .hero-image img {
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-lg);
+      transform: perspective(800px) rotateY(-2deg) rotateX(2deg);
+      transition: 0.6s;
+    }
+    .hero-image img:hover { transform: perspective(800px) rotateY(0) rotateX(0); }
 
-    /* ===== Cards ===== */
-    .card-grid {
+    /* ===== BENTO GRID ===== */
+    .bento-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 28px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 32px;
+    }
+    .bento-item {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      padding: 28px 24px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      text-align: center;
+      min-height: 160px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .bento-item:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(212, 167, 44, 0.2);
+    }
+    .bento-item i { font-size: 2.8rem; color: var(--secondary); margin-bottom: 12px; }
+    .bento-item h4 { font-size: 1.2rem; font-weight: 700; }
+    .bento-item p { font-size: 0.9rem; color: var(--text-soft); }
+    .bento-item.wide { grid-column: span 2; }
+    .bento-item.tall { grid-row: span 2; min-height: 280px; }
+
+    /* ===== TRUST STRIP ===== */
+    .trust-strip {
+      display: flex;
+      justify-content: center;
+      gap: 64px;
+      flex-wrap: wrap;
+      padding: 32px 0;
+      margin-top: 16px;
+    }
+    .trust-item {
+      text-align: center;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .trust-item i { font-size: 2.4rem; color: var(--secondary); }
+    .trust-item strong { font-size: 1.8rem; font-weight: 800; display: block; line-height: 1; }
+    .trust-item span { font-size: 0.9rem; color: var(--text-soft); }
+
+    /* ===== PROCESS (glass) ===== */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 20px;
       margin-top: 28px;
     }
-    .card {
-      background: white;
-      border-radius: var(--radius);
-      padding: 32px 24px;
-      box-shadow: var(--shadow-sm);
-      transition: var(--transition);
-      text-align: center;
-      border: 1px solid rgba(11,37,69,0.04);
-    }
-    .card:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); border-color: transparent; }
-    .card i { font-size: 2.6rem; color: var(--secondary); margin-bottom: 16px; }
-    .card h4 { font-size: 1.3rem; margin-bottom: 8px; }
-
-    .trust-icons {
-      display: flex;
-      justify-content: center;
-      gap: 56px;
-      flex-wrap: wrap;
-      margin: 32px 0;
-    }
-    .trust-item { text-align: center; }
-    .trust-item i { font-size: 2.8rem; color: var(--secondary); }
-    .trust-item strong { display: block; font-size: 1.8rem; font-weight: 800; }
-
-    .process-steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
-      gap: 20px;
-      counter-reset: step;
-    }
-    .step {
-      background: white;
-      border-radius: var(--radius);
+    .process-step {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
       padding: 28px 16px;
-      box-shadow: var(--shadow-sm);
       text-align: center;
-      position: relative;
       transition: var(--transition);
-      border: 1px solid rgba(11,37,69,0.04);
+      position: relative;
     }
-    .step:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .step::before {
-      counter-increment: step;
-      content: counter(step);
+    .process-step:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .process-step .step-num {
+      display: inline-flex;
+      width: 44px;
+      height: 44px;
       background: var(--secondary);
       color: var(--primary);
-      font-weight: 700;
-      width: 40px;
-      height: 40px;
+      font-weight: 800;
       border-radius: 50%;
-      display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 14px;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
+      margin-bottom: 12px;
     }
 
-    .rate-cards {
+    /* ===== RATES ===== */
+    .rate-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 20px;
     }
     .rate-card {
-      background: white;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
       padding: 28px 20px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-sm);
-      border-left: 6px solid var(--secondary);
+      text-align: center;
       transition: var(--transition);
     }
-    .rate-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .rate-card .rate { font-size: 2.2rem; font-weight: 800; color: var(--primary); }
-    .disclaimer { font-size: 0.8rem; color: #5a6a7a; margin-top: 16px; }
+    .rate-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .rate-card .rate { font-size: 2.4rem; font-weight: 800; color: var(--primary); }
+    .rate-card .term { font-size: 0.9rem; color: var(--text-soft); }
 
-    /* ===== FORMS ===== */
+    /* ===== TESTIMONIALS ===== */
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px;
+    }
+    .testimonial {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      padding: 28px 24px;
+      transition: var(--transition);
+      font-style: italic;
+    }
+    .testimonial:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .testimonial .name { font-weight: 700; font-style: normal; margin-top: 12px; color: var(--primary); }
+
+    /* ===== FORM ===== */
     .form-group { margin-bottom: 20px; }
     .form-group label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.95rem; }
-    .form-group input, .form-group select, .form-group textarea {
+    .form-group input, .form-group select {
       width: 100%;
       padding: 14px 18px;
-      border: 1px solid #d8dfe8;
-      border-radius: var(--radius-sm);
+      border: 1px solid rgba(11,37,69,0.08);
+      border-radius: var(--radius-lg);
       font-size: 1rem;
       transition: 0.2s;
-      background: white;
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(4px);
     }
     .form-group input:focus, .form-group select:focus {
       outline: none;
       border-color: var(--secondary);
-      box-shadow: 0 0 0 4px rgba(212,167,44,0.15);
+      box-shadow: 0 0 0 4px rgba(212,167,44,0.1);
+      background: white;
     }
     .multi-step { max-width: 700px; margin: 0 auto; }
-    .step-content { display: block; animation: fadeUp 0.3s ease; }
+    .step-content { display: block; animation: fadeUp 0.4s ease; }
     .step-content.hidden { display: none; }
     .step-nav { display: flex; gap: 12px; justify-content: space-between; margin-top: 24px; }
-
-    .testimonial-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
-      gap: 28px;
-    }
-    .testimonial {
-      background: white;
-      padding: 28px 24px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-sm);
-      font-style: italic;
-      border: 1px solid rgba(11,37,69,0.04);
-      transition: var(--transition);
-    }
-    .testimonial:hover { box-shadow: var(--shadow-md); }
-    .testimonial .name { font-weight: 700; font-style: normal; margin-top: 12px; color: var(--primary); }
 
     /* ===== FOOTER ===== */
     footer {
       background: var(--primary);
-      color: rgba(255,255,255,0.9);
+      color: rgba(255,255,255,0.85);
       padding: 56px 0 24px;
+      backdrop-filter: blur(4px);
     }
     .footer-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 40px;
     }
-    .footer-grid h5 { color: white; margin-bottom: 16px; font-size: 1.1rem; font-weight: 700; }
+    .footer-grid h5 { color: white; font-weight: 700; margin-bottom: 16px; }
     .footer-grid a { color: #bcc9db; display: block; margin: 8px 0; transition: 0.2s; }
     .footer-grid a:hover { color: white; }
     .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.08);
+      border-top: 1px solid rgba(255,255,255,0.06);
       margin-top: 40px;
       padding-top: 24px;
-      font-size: 0.85rem;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       gap: 12px;
+      font-size: 0.85rem;
     }
-    .equal-housing { display: flex; align-items: center; gap: 8px; }
 
-    /* ===== Animations ===== */
+    /* ===== ANIMATIONS ===== */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(12px); }
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .fade-in { animation: fadeUp 0.5s ease; }
+    .fade-in { animation: fadeUp 0.6s ease; }
+    .micro-float {
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
 
-    /* ===== Responsive ===== */
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 992px) {
       .hero-grid { grid-template-columns: 1fr; text-align: center; }
       .hero p { margin-left: auto; margin-right: auto; }
       .hero-ctas { justify-content: center; }
-      .hero h1 { font-size: 3rem; }
+      .hero h1 { font-size: 3.2rem; }
       .nav-desktop { display: none; }
       .hamburger { display: block; }
       .mobile-nav.open { display: flex; }
+      .bento-grid { grid-template-columns: 1fr 1fr; }
+      .bento-item.wide { grid-column: span 1; }
+      .bento-item.tall { grid-row: span 1; min-height: 160px; }
     }
     @media (max-width: 600px) {
-      .hero h1 { font-size: 2.4rem; }
+      .hero h1 { font-size: 2.6rem; }
       .section-padding { padding: 56px 0; }
-      .trust-icons { gap: 28px; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      h2 { font-size: 2rem; }
+      .trust-strip { gap: 28px; }
+      .bento-grid { grid-template-columns: 1fr; }
+      h2 { font-size: 2.2rem; }
+      .container { padding: 0 20px; }
     }
-    /* utilities */
-    .bg-light { background: var(--bg-light); }
-    .flex-center { display: flex; align-items: center; gap: 8px; }
-    .mt-16 { margin-top: 16px; }
-    .mb-16 { margin-bottom: 16px; }
-    .gap-8 { gap: 8px; }
-    .text-small { font-size: 0.9rem; }
-    .compliance-note { background: #f0f3f8; padding: 12px 20px; border-radius: var(--radius-sm); border-left: 4px solid var(--secondary); }
     .badge {
       display: inline-block;
       background: var(--secondary);
       color: var(--primary);
-      padding: 4px 16px;
+      padding: 6px 20px;
       border-radius: 60px;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 0.8rem;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.4px;
+      margin-bottom: 8px;
     }
+    .bg-soft { background: rgba(255,255,255,0.4); backdrop-filter: blur(8px); }
+    .mt-16 { margin-top: 16px; }
+    .mb-16 { margin-bottom: 16px; }
+    .compliance-note { background: rgba(11,37,69,0.04); padding: 12px 20px; border-radius: var(--radius-lg); border-left: 4px solid var(--secondary); }
+    .text-soft { color: var(--text-soft); }
   </style>
 </head>
 <body>
@@ -377,8 +458,8 @@
       <div class="logo"><a href="#"><span>Summit</span>Harbor</a></div>
       <nav class="nav-desktop">
         <a href="#">Home</a>
-        <a href="#loan-programs">Loan Programs</a>
-        <a href="#officers">Loan Officers</a>
+        <a href="#loan-programs">Programs</a>
+        <a href="#officers">Officers</a>
         <a href="#calculator">Calculator</a>
         <a href="#resources">Resources</a>
         <a href="#blog">Blog</a>
@@ -392,16 +473,11 @@
       <button class="hamburger" id="hamburger" aria-label="Menu"><i class="fas fa-bars"></i></button>
     </div>
     <div class="container mobile-nav" id="mobileNav">
-      <a href="#">Home</a>
-      <a href="#loan-programs">Loan Programs</a>
-      <a href="#officers">Loan Officers</a>
-      <a href="#calculator">Calculator</a>
-      <a href="#resources">Resources</a>
-      <a href="#blog">Blog</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a href="#">Home</a><a href="#loan-programs">Programs</a><a href="#officers">Officers</a>
+      <a href="#calculator">Calculator</a><a href="#resources">Resources</a><a href="#blog">Blog</a>
+      <a href="#about">About</a><a href="#contact">Contact</a>
       <a href="#preapproval" class="btn btn-primary">Get Pre-Approved</a>
-      <a href="#contact" class="btn btn-secondary">Talk to a Loan Officer</a>
+      <a href="#contact" class="btn btn-secondary">Talk to an Expert</a>
     </div>
   </header>
 
@@ -409,53 +485,56 @@
   <section class="hero">
     <div class="container hero-grid">
       <div>
-        <span class="badge">🏡 Trusted Mortgage Advisors</span>
-        <h1>Expert Mortgage Solutions. Personal Guidance.</h1>
-        <p>Summit Harbor Mortgage helps buyers and homeowners find the right financing with clarity, confidence, and a human touch.</p>
+        <span class="badge"><i class="fas fa-rocket"></i> Next-Gen Mortgage</span>
+        <h1>Expert Solutions.<br />Personal Guidance.</h1>
+        <p>Summit Harbor blends cutting-edge technology with human expertise to make home financing clear, fast, and stress-free.</p>
         <div class="hero-ctas">
           <a href="#preapproval" class="btn btn-primary">Get Pre-Approved <i class="fas fa-arrow-right"></i></a>
           <a href="#contact" class="btn btn-outline">Talk to an Expert</a>
         </div>
-        <div class="trust-icons" style="margin-top:36px; justify-content:flex-start;">
-          <div class="trust-item"><i class="fas fa-star"></i><strong>5-Star</strong> Client Service</div>
-          <div class="trust-item"><i class="fas fa-user-tie"></i><strong>Experienced</strong> Loan Officers</div>
-          <div class="trust-item"><i class="fas fa-file-signature"></i><strong>1,000+</strong> Loans Supported</div>
-        </div>
       </div>
-      <div class="hero-image"><img src="https://images.pexels.com/photos/280229/pexels-photo-280229.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Modern family home" /></div>
+      <div class="hero-image micro-float">
+        <img src="https://images.pexels.com/photos/280229/pexels-photo-280229.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Modern home" />
+      </div>
+    </div>
+    <!-- Trust Strip -->
+    <div class="container trust-strip">
+      <div class="trust-item"><i class="fas fa-star"></i><div><strong>5-Star</strong><span>Client Service</span></div></div>
+      <div class="trust-item"><i class="fas fa-user-tie"></i><div><strong>Experienced</strong><span>Loan Officers</span></div></div>
+      <div class="trust-item"><i class="fas fa-file-signature"></i><div><strong>1,000+</strong><span>Loans Supported</span></div></div>
+      <div class="trust-item"><i class="fas fa-bolt"></i><div><strong>Fast</strong><span>Pre-Approvals</span></div></div>
     </div>
   </section>
 
-  <!-- ===== LOAN PROGRAMS ===== -->
+  <!-- ===== LOAN PROGRAMS (BENTO) ===== -->
   <section id="loan-programs" class="section-padding">
-    <div class="container text-center">
-      <span class="badge">Our Offerings</span>
-      <h2>Loan Programs</h2>
-      <p style="color:var(--text-soft); max-width:600px; margin:0 auto 12px;">Find the right mortgage for your unique situation.</p>
-      <div class="card-grid">
-        <div class="card"><i class="fas fa-home"></i><h4>Purchase</h4><a href="#" class="text-small">Learn more →</a></div>
-        <div class="card"><i class="fas fa-sync-alt"></i><h4>Refinance</h4><a href="#" class="text-small">Learn more →</a></div>
-        <div class="card"><i class="fas fa-flag-usa"></i><h4>FHA</h4><a href="#" class="text-small">Learn more →</a></div>
-        <div class="card"><i class="fas fa-shield-alt"></i><h4>VA</h4><a href="#" class="text-small">Learn more →</a></div>
-        <div class="card"><i class="fas fa-tree"></i><h4>USDA</h4><a href="#" class="text-small">Learn more →</a></div>
-        <div class="card"><i class="fas fa-chart-line"></i><h4>Jumbo</h4><a href="#" class="text-small">Learn more →</a></div>
-        <div class="card"><i class="fas fa-hand-holding-usd"></i><h4>Conventional</h4><a href="#" class="text-small">Learn more →</a></div>
+    <div class="container">
+      <div class="text-center"><span class="badge">Our Offerings</span><h2>Loan Programs</h2></div>
+      <div class="bento-grid">
+        <div class="bento-item"><i class="fas fa-home"></i><h4>Purchase</h4><p>Find your dream home</p></div>
+        <div class="bento-item"><i class="fas fa-sync-alt"></i><h4>Refinance</h4><p>Lower your rate</p></div>
+        <div class="bento-item"><i class="fas fa-flag-usa"></i><h4>FHA</h4><p>Low down payment</p></div>
+        <div class="bento-item"><i class="fas fa-shield-alt"></i><h4>VA</h4><p>For veterans</p></div>
+        <div class="bento-item wide"><i class="fas fa-tree"></i><h4>USDA</h4><p>Rural home financing</p></div>
+        <div class="bento-item"><i class="fas fa-chart-line"></i><h4>Jumbo</h4><p>High-balance loans</p></div>
+        <div class="bento-item"><i class="fas fa-hand-holding-usd"></i><h4>Conventional</h4><p>Standard & flexible</p></div>
+        <div class="bento-item tall"><i class="fas fa-compass"></i><h4>Find Your Fit</h4><p>Talk to an advisor to match the perfect loan.</p><a href="#contact" class="btn btn-secondary btn-sm" style="margin-top:12px;">Get Started</a></div>
       </div>
     </div>
   </section>
 
-  <!-- ===== WHY CHOOSE US ===== -->
-  <section class="section-padding bg-light">
+  <!-- ===== WHY CHOOSE (glass) ===== -->
+  <section class="section-padding" style="background: rgba(255,255,255,0.3); backdrop-filter: blur(4px);">
     <div class="container text-center">
       <span class="badge">Why Summit Harbor</span>
       <h2>Designed for Your Success</h2>
-      <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(170px,1fr));">
-        <div class="card"><i class="fas fa-map-marker-alt"></i><h4>Local Experts</h4></div>
-        <div class="card"><i class="fas fa-handshake"></i><h4>Competitive Options</h4></div>
-        <div class="card"><i class="fas fa-comment-dots"></i><h4>Clear Communication</h4></div>
-        <div class="card"><i class="fas fa-bolt"></i><h4>Fast Pre-Approvals</h4></div>
-        <div class="card"><i class="fas fa-user-check"></i><h4>Personalized Guidance</h4></div>
-        <div class="card"><i class="fas fa-lock"></i><h4>Secure Application</h4></div>
+      <div class="bento-grid" style="grid-template-columns: repeat(auto-fit, minmax(170px,1fr));">
+        <div class="bento-item"><i class="fas fa-map-marker-alt"></i><h4>Local Experts</h4></div>
+        <div class="bento-item"><i class="fas fa-handshake"></i><h4>Competitive Options</h4></div>
+        <div class="bento-item"><i class="fas fa-comment-dots"></i><h4>Clear Communication</h4></div>
+        <div class="bento-item"><i class="fas fa-bolt"></i><h4>Fast Pre-Approvals</h4></div>
+        <div class="bento-item"><i class="fas fa-user-check"></i><h4>Personalized Guidance</h4></div>
+        <div class="bento-item"><i class="fas fa-lock"></i><h4>Secure Application</h4></div>
       </div>
     </div>
   </section>
@@ -465,29 +544,29 @@
     <div class="container text-center">
       <span class="badge">How It Works</span>
       <h2>Your Mortgage Journey</h2>
-      <div class="process-steps">
-        <div class="step">Apply</div>
-        <div class="step">Review Options</div>
-        <div class="step">Get Pre-Approved</div>
-        <div class="step">Find Your Home</div>
-        <div class="step">Underwriting</div>
-        <div class="step">Close</div>
+      <div class="process-grid">
+        <div class="process-step"><div class="step-num">1</div><h4>Apply</h4></div>
+        <div class="process-step"><div class="step-num">2</div><h4>Review Options</h4></div>
+        <div class="process-step"><div class="step-num">3</div><h4>Get Pre-Approved</h4></div>
+        <div class="process-step"><div class="step-num">4</div><h4>Find Your Home</h4></div>
+        <div class="process-step"><div class="step-num">5</div><h4>Underwriting</h4></div>
+        <div class="process-step"><div class="step-num">6</div><h4>Close</h4></div>
       </div>
     </div>
   </section>
 
   <!-- ===== RATES ===== -->
-  <section class="section-padding bg-light">
+  <section class="section-padding" style="background: rgba(255,255,255,0.2);">
     <div class="container text-center">
-      <span class="badge">Current Sample Rates</span>
-      <h2>Competitive Rates</h2>
-      <div class="rate-cards">
-        <div class="rate-card"><div class="rate">6.75%</div>30-Year Fixed</div>
-        <div class="rate-card"><div class="rate">5.99%</div>15-Year Fixed</div>
-        <div class="rate-card"><div class="rate">6.25%</div>FHA</div>
-        <div class="rate-card"><div class="rate">6.50%</div>VA</div>
+      <span class="badge">Sample Rates</span>
+      <h2>Competitive Offers</h2>
+      <div class="rate-grid">
+        <div class="rate-card"><div class="rate">6.75%</div><div class="term">30-Year Fixed</div></div>
+        <div class="rate-card"><div class="rate">5.99%</div><div class="term">15-Year Fixed</div></div>
+        <div class="rate-card"><div class="rate">6.25%</div><div class="term">FHA</div></div>
+        <div class="rate-card"><div class="rate">6.50%</div><div class="term">VA</div></div>
       </div>
-      <p class="disclaimer">Sample rates for demonstration purposes only. Rates subject to change and not a commitment to lend.</p>
+      <p class="text-soft" style="font-size:0.85rem; margin-top:16px;">Sample rates for demonstration purposes only. Rates subject to change.</p>
     </div>
   </section>
 
@@ -511,16 +590,16 @@
       <p style="color:rgba(255,255,255,0.8); max-width:500px; margin:8px auto 24px;">Let’s find the right mortgage solution for you.</p>
       <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
         <a href="#preapproval" class="btn btn-gold">Start Pre-Approval <i class="fas fa-arrow-right"></i></a>
-        <a href="#contact" class="btn btn-outline" style="border-color:white; color:white;">Speak With a Loan Officer</a>
+        <a href="#contact" class="btn btn-ghost">Speak With a Loan Officer</a>
       </div>
     </div>
   </section>
 
-  <!-- ===== CONTACT / PRE-APPROVAL (multi-step) ===== -->
-  <section id="preapproval" class="section-padding bg-light">
+  <!-- ===== PRE-APPROVAL (multi-step) ===== -->
+  <section id="preapproval" class="section-padding" style="background: rgba(255,255,255,0.3); backdrop-filter: blur(4px);">
     <div class="container">
       <div class="text-center"><span class="badge">Get Started</span><h2>Pre-Approval Application</h2></div>
-      <div class="multi-step" id="preapprovalForm">
+      <div class="multi-step glass" style="padding:40px; border-radius:var(--radius-xl);" id="preapprovalForm">
         <!-- Step 1 -->
         <div class="step-content" data-step="1">
           <h3>Your Goal</h3>
@@ -558,7 +637,7 @@
           <div class="form-group"><label><input type="checkbox" /> I agree to the disclosure and consent to be contacted.</label></div>
           <div class="compliance-note">Placeholder disclosure – must be reviewed by compliance/legal.</div>
           <button class="btn btn-gold" id="submitPreapproval">Submit Application <i class="fas fa-check"></i></button>
-          <div id="successMsg" style="display:none; margin-top:20px; background:#d4edda; padding:16px; border-radius:var(--radius-sm);">✅ Thank you! Your pre-approval request has been received.</div>
+          <div id="successMsg" style="display:none; margin-top:20px; background:#d4edda; padding:16px; border-radius:var(--radius-lg);">✅ Thank you! Your pre-approval request has been received.</div>
         </div>
         <div class="step-nav"><button class="btn btn-outline btn-sm" id="prevStep" style="display:none;"><i class="fas fa-arrow-left"></i> Back</button></div>
       </div>
@@ -570,20 +649,20 @@
     <div class="container text-center">
       <span class="badge">Our Team</span>
       <h2>Loan Officers</h2>
-      <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px,1fr));">
-        <div class="card"><i class="fas fa-user-circle fa-4x" style="color:var(--primary);"></i><h4>Jason Miller</h4><p>Senior Loan Officer<br>NMLS #1234567</p><a href="#" class="btn btn-primary btn-sm">View Profile</a></div>
-        <div class="card"><i class="fas fa-user-circle fa-4x" style="color:var(--primary);"></i><h4>Emily Carter</h4><p>Mortgage Loan Officer<br>NMLS #2345678</p><a href="#" class="btn btn-primary btn-sm">View Profile</a></div>
-        <div class="card"><i class="fas fa-user-circle fa-4x" style="color:var(--primary);"></i><h4>Michael Brooks</h4><p>Senior Mortgage Advisor<br>NMLS #3456789</p><a href="#" class="btn btn-primary btn-sm">View Profile</a></div>
+      <div class="bento-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px,1fr));">
+        <div class="bento-item"><i class="fas fa-user-circle fa-4x" style="color:var(--primary);"></i><h4>Jason Miller</h4><p>Senior Loan Officer<br>NMLS #1234567</p><a href="#" class="btn btn-primary btn-sm">View Profile</a></div>
+        <div class="bento-item"><i class="fas fa-user-circle fa-4x" style="color:var(--primary);"></i><h4>Emily Carter</h4><p>Mortgage Loan Officer<br>NMLS #2345678</p><a href="#" class="btn btn-primary btn-sm">View Profile</a></div>
+        <div class="bento-item"><i class="fas fa-user-circle fa-4x" style="color:var(--primary);"></i><h4>Michael Brooks</h4><p>Senior Mortgage Advisor<br>NMLS #3456789</p><a href="#" class="btn btn-primary btn-sm">View Profile</a></div>
       </div>
     </div>
   </section>
 
   <!-- ===== CALCULATOR ===== -->
-  <section id="calculator" class="section-padding bg-light">
+  <section id="calculator" class="section-padding" style="background: rgba(255,255,255,0.2);">
     <div class="container text-center">
       <span class="badge">Plan Your Budget</span>
       <h2>Mortgage Calculator</h2>
-      <div style="max-width:600px; margin:0 auto;">
+      <div class="glass" style="max-width:600px; margin:0 auto; padding:40px; border-radius:var(--radius-xl);">
         <div class="form-group"><label>Home Price</label><input id="homePrice" value="350000" /></div>
         <div class="form-group"><label>Down Payment</label><input id="downPayment" value="70000" /></div>
         <div class="form-group"><label>Interest Rate (%)</label><input id="interestRate" value="6.75" /></div>
@@ -591,12 +670,12 @@
         <div class="form-group"><label>Property Tax (monthly)</label><input id="propertyTax" value="250" /></div>
         <div class="form-group"><label>Insurance (monthly)</label><input id="insurance" value="100" /></div>
         <button class="btn btn-primary" id="calcBtn">Calculate <i class="fas fa-calculator"></i></button>
-        <div id="calcResult" style="margin-top:28px; background:white; padding:28px; border-radius:var(--radius); box-shadow:var(--shadow-sm);">
+        <div id="calcResult" style="margin-top:28px; background:rgba(255,255,255,0.5); padding:28px; border-radius:var(--radius-lg);">
           <p><strong>Principal & Interest:</strong> $<span id="pi">0</span></p>
           <p><strong>Taxes:</strong> $<span id="tax">0</span></p>
           <p><strong>Insurance:</strong> $<span id="ins">0</span></p>
-          <p style="font-size:1.6rem; font-weight:700; color:var(--primary);"><strong>Total Monthly:</strong> $<span id="total">0</span></p>
-          <p class="disclaimer">Estimates for informational purposes only.</p>
+          <p style="font-size:1.8rem; font-weight:800; color:var(--primary);"><strong>Total Monthly:</strong> $<span id="total">0</span></p>
+          <p class="text-soft" style="font-size:0.8rem;">Estimates for informational purposes only.</p>
         </div>
       </div>
     </div>
@@ -606,13 +685,13 @@
   <footer>
     <div class="container">
       <div class="footer-grid">
-        <div><h5>Loan Programs</h5><a href="#">Purchase</a><a href="#">Refinance</a><a href="#">FHA</a><a href="#">VA</a><a href="#">USDA</a></div>
-        <div><h5>Company</h5><a href="#about">About</a><a href="#officers">Loan Officers</a><a href="#contact">Contact</a><a href="#">Careers</a></div>
-        <div><h5>Resources</h5><a href="#">First-Time Guide</a><a href="#">Glossary</a><a href="#">FAQs</a><a href="#">Blog</a></div>
-        <div><h5>Contact</h5><p><i class="fas fa-phone"></i> (555) 247-8100</p><p><i class="fas fa-envelope"></i> hello@summitharbormortgage.com</p><p><i class="fas fa-map-pin"></i> Austin, TX</p></div>
+        <div><h5>Loan Programs</h5><a href="#">Purchase</a><a href="#">Refinance</a><a href="#">FHA</a><a href="#">VA</a></div>
+        <div><h5>Company</h5><a href="#about">About</a><a href="#officers">Officers</a><a href="#contact">Contact</a></div>
+        <div><h5>Resources</h5><a href="#">First-Time Guide</a><a href="#">Glossary</a><a href="#">FAQs</a></div>
+        <div><h5>Contact</h5><p><i class="fas fa-phone"></i> (555) 247-8100</p><p><i class="fas fa-envelope"></i> hello@summitharbormortgage.com</p></div>
       </div>
       <div class="footer-bottom">
-        <div class="equal-housing"><i class="fas fa-home"></i> Equal Housing Opportunity</div>
+        <div><i class="fas fa-home"></i> Equal Housing Opportunity</div>
         <div>NMLS #9999999 | State Licensing placeholder</div>
         <div><a href="#">Privacy</a> | <a href="#">Terms</a> | <a href="#">Accessibility</a></div>
         <div>&copy; 2026 Summit Harbor Mortgage</div>
@@ -621,12 +700,12 @@
   </footer>
 
   <script>
-    // Mobile menu
+    // Mobile
     document.getElementById('hamburger').addEventListener('click', function() {
       document.getElementById('mobileNav').classList.toggle('open');
     });
 
-    // Multi-step pre-approval
+    // Multi-step
     let currentStep = 1;
     const steps = document.querySelectorAll('.step-content');
     const prevBtn = document.getElementById('prevStep');
@@ -646,7 +725,6 @@
     });
     document.getElementById('submitPreapproval').addEventListener('click', function() {
       document.getElementById('successMsg').style.display = 'block';
-      // In production: send data to CRM/webhook
     });
 
     // Calculator
@@ -668,9 +746,7 @@
       document.getElementById('total').textContent = (pi + tax + ins).toFixed(2);
     });
     document.getElementById('calcBtn').click();
-
-    // Analytics placeholder
-    console.log('Analytics: GA4, Meta Pixel ready. Events: lead_start, lead_submit, phone_click, etc.');
+    console.log('Analytics: GA4, Meta Pixel ready. Events: lead_start, lead_submit, etc.');
   </script>
 </body>
 </html>
